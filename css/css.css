@@ -10,6 +10,25 @@ h2 {
 	font-size: 2rem;
 }
 
+a {
+	color: brown;
+	text-decoration: none;
+}
+
+a:hover {
+	color: blueviolet;
+	text-decoration: underline;
+}
+
+pre > h3 {
+	font-family: inherit;
+}
+
+h3 > a {
+	font-size: 1rem;
+	opacity: 0.75;
+}
+
 @media (min-width: 1024px) {
 	* {
 		font-size: 1.25rem;
