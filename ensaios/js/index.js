@@ -7,6 +7,8 @@ const utils = new Utils();
 const index = document.getElementById('index');
 const songs = document.getElementById('songs');
 
+setList.songs.sort((song1, song2) => `${song1.author} - ${song1.name}`.localeCompare(`${song2.author} - ${song2.name}`));
+
 setList.songs.forEach(song => {
     const item = document.createElement('li');
     item.innerHTML = `<a href="#${utils.clean(song.author, song.name)}">${song.author} - ${song.name}</a>`;
