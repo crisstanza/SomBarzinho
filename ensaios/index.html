@@ -9,14 +9,23 @@
 </head>
 
 <body>
-	<h1>SomBarzinho</h1>
+	<h1><a href=".">SomBarzinho</a></h1>
 	<hr />
-	Evento: <i>Ensaio 26-Abril-2025</i>
+	<section id="event">
+		Evento: <i>Ensaio 26-Abril-2025</i>
+	</section>
 	<hr />
 	<h2 id="musicas">M&uacute;sicas:</h2>
-	<ul id="index"></ul>
 	<hr />
-	<br/>
+	<section id="sort">
+		Ordenar por: <a href="#artista" class="current">artista</a> | <a href="#nome">m&uacute;sica</a>
+	</section>
+	<hr />
+	<ol id="index">
+		<li class="loading"><i>carregando...</i></li>
+	</ol>
+	<hr />
+	<br />
 	<div id="songs"></div>
 </body>
 

@@ -20,13 +20,25 @@ a:hover {
 	text-decoration: underline;
 }
 
-pre > h3 {
+a.current {
+	font-weight: bold;
+}
+
+pre>h3 {
 	font-family: inherit;
 }
 
-h3 > a {
+h3>a {
 	font-size: 1rem;
 	opacity: 0.75;
+}
+
+ol {
+	margin-left: 10px;
+}
+
+ol>li.loading {
+	list-style-type: none;
 }
 
 @media (min-width: 1024px) {
@@ -43,6 +55,17 @@ h3 > a {
 	}
 }
 
-h1, h2 {
+@media (max-width: 1024px) {
+	pre {
+		text-wrap: auto;
+	}
+}
+
+h1,
+h2 {
 	text-align: center;
+}
+
+h1>a {
+	font-size: inherit;
 }

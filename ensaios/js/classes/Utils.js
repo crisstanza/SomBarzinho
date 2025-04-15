@@ -26,4 +26,10 @@ export class Utils {
     #highlightInCurlyBrackets(str) {
         return str.replace(/\{([^\}]+)\}/g, '<i>{$1}</i>');
     }
+
+    removeAllChildren(node) {
+        while (node.firstChild) {
+            node.removeChild(node.lastChild);
+        }
+    }
 }
