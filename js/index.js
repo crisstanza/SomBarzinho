@@ -41,7 +41,7 @@ function sortSongs() {
 }
 
 function showSongs() {
-    total.innerHTML = `(${setList.songs.length})`;
+    total.innerHTML = ` (${setList.songs.length})`;
     const sortBy = sortSongs();
     utils.removeAllChildren(songs);
     utils.removeAllChildren(index);
