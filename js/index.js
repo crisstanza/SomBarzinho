@@ -7,6 +7,7 @@ const utils = new Utils();
 const sort = document.getElementById('sort');
 const index = document.getElementById('index');
 const songs = document.getElementById('songs');
+const total = document.getElementById('total');
 
 setListenners();
 showSongs();
@@ -40,6 +41,7 @@ function sortSongs() {
 }
 
 function showSongs() {
+    total.innerHTML = `(${setList.songs.length})`;
     const sortBy = sortSongs();
     utils.removeAllChildren(songs);
     utils.removeAllChildren(index);
