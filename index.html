@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<title>SomBarzinho</title>
-		<link rel="icon" href="favicon.ico" type="image/x-icon" />
-		<link rel="stylesheet" href="css/css.css" />
-	</head>
+<head>
+	<title>Stanza Fest - O menor festival de música do interior do estado!</title>
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="css/css.css?c=1" />
+	<script type="module" src="js/index.js?c=1"></script>
+</head>
 
-	<body>
-		<h1>SomBarzinho</h1>
-		<hr />
-		Evento: <i>Som ao vivo no Bola de Fogo</i>
-		<hr />
-		<h2>Pedir Música</h2>
-		<ul>
-			<li>Audioslave - Like a Stone</li>
-			<li>Detonautas - Olhos Certos</li>
-			<li>Legião Urbana - Tempo Perdido</li>
-			<li>Radiohead - Creep</li>
-			<li>U2 - With or Without You</li>
-		</ul>
-		<hr />
-	</body>
+<body>
+	<h1><a href=".">SomBarzinho</a></h1>
+	<hr />
+	<section id="event">
+		Evento: <i>Stanza Fest - O menor festival de m&uacute;sica do interior do estado!</i><br />
+		Quando? <b>30-Agosto-2025, 14:00</b><br />
+		<a href="regulamento-e-regras-de-convivencia.html">Regulamento e Regras de Conviv&ecirc;ncia</a>
+	</section>
+	<hr />
+	<h2 id="musicas">M&uacute;sicas:</h2>
+	<hr />
+	<section id="sort">
+		Ordenar por: <a href="#artista" class="current">artista</a> | <a href="#nome">m&uacute;sica</a>
+	</section>
+	<hr />
+	<ol id="index">
+		<li class="loading"><i>carregando...</i></li>
+	</ol>
+	<hr />
+	<br />
+	<div id="songs"></div>
+</body>
 
 </html>
