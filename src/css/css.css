@@ -20,7 +20,7 @@
 body {
 	width: min(100% - 2rem, 960px);
 	margin: 0 auto;
-	padding: 2rem 0 4rem;
+	padding: 2rem 0 1rem;
 
 	&.bg {
 		background-image: url("../img/bg-2.png");
