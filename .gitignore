@@ -1,3 +1,9 @@
+build
+src/js
 .vite
+
 .DS_Store
-tmp
+
+GarageBand/**/WindowImage.jpg
+
+scripts/tmp/*
