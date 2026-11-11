@@ -1,21 +1,39 @@
 export class Utils {
-  #cleanStr(str: string) {
+  #normalizeStr(str: string) {
     return str
       .replace(/\s/g, "-")
       .normalize("NFD")
       .replace(/[\p{Mn}]+/gu, "");
   }
 
-  clean(author: string, title: string) {
+  #escapeStr(str: string) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
+  normalize(author: string, title: string) {
     const parts = [];
-    parts.push(this.#cleanStr(author));
+    parts.push(this.#normalizeStr(author));
     parts.push("_");
-    parts.push(this.#cleanStr(title));
+    parts.push(this.#normalizeStr(title));
     return parts.join("");
   }
 
-  highlight(str: string) {
+  highlightChords(str: string) {
     return this.#highlightInSquareBrackets(this.#highlightInCurlyBrackets(str));
+  }
+
+  highlightBoldSearch(str: string, term: string) {
+    if (!term) {
+      return str;
+    }
+    return str.replace(new RegExp(this.#escapeStr(term), "gi"), (match) => `<b>${match}</b>`);
+  }
+
+  highlightItalicSearch(str: string, term: string) {
+    if (!term) {
+      return str;
+    }
+    return str.replace(new RegExp(this.#escapeStr(term), "gi"), (match) => `<i class="result">${match}</i>`);
   }
 
   #highlightInSquareBrackets(str: string) {

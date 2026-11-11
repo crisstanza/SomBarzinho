@@ -10,7 +10,7 @@
     <script type="module" src="js/index.mjs?ts=${TS}"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="bg-2">
+  <body bg="0" class="bg-0">
     <h1><a href=".">SomBarzinho</a></h1>
     <hr />
     <section id="event">
@@ -19,11 +19,16 @@
       Quem? <b>Dualuna</b> e <b>SomBarzinho</b>.<br />
       Quando? <b>14-Novembro-2026, 12:00</b><br />
       <br />
-      <a href="regulamento-e-regras-de-convivencia.html">Regulamento e Regras de Conviv&ecirc;ncia</a> | <a href="playlist.html">Playlist</a>
+      <a href="regulamento-e-regras-de-convivencia.html">Regulamento e Regras de Conviv&ecirc;ncia</a> | <a href="playlist.html">Playlist</a> | <a href="eventos/" class="lowlight">Edi&ccedil;&otilde;es Anteriores</a>
     </section>
     <hr />
     <h2 id="musicas">M&uacute;sicas<span id="total"></span>:</h2>
     <hr />
+    <section class="search search-input">
+      <input type="text" id="searchTerm" />
+      <input type="button" id="clearSearch" value="X" />
+    </section>
+    <section class="search" id="search">Pesquisar em: <a href="#artista" class="current">artista</a> | <a class="current" href="#nome">m&uacute;sica</a> | <a href="#letra">letra</a></section>
     <section id="sort">Ordenar por: <a href="#artista" class="current">artista</a> | <a href="#nome">m&uacute;sica</a></section>
     <hr />
     <ol id="index">
