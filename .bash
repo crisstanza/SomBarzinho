@@ -63,22 +63,46 @@ build() {
     
     echo ''
     cp src/*.* build --verbose
-    cp -r src/eventos build --verbose
-    cp -r src/img build --verbose
+    
+    local DO_NOT_COPY=()
+    DO_NOT_COPY+=('.vite')
+    DO_NOT_COPY+=('css')
+    DO_NOT_COPY+=('js')
+    DO_NOT_COPY+=('ts')
+    
+    shopt -s globstar nullglob
+    for filePath in src/*/ ; do
+        local FOLDER_NAME=`basename ${filePath}`
+        local CONTAINS=`_array_contains DO_NOT_COPY "${FOLDER_NAME}"`
+        if [[ $CONTAINS -eq 0 ]] ; then
+            cp -r "${filePath}" build --verbose
+        fi
+    done
     echo ''
     
     local TS=`date +%s`
-    
-    shopt -s globstar nullglob
     for filePath in build/**/*.html ; do
         _replace_in_file '${TS}' "${TS}" "${filePath}"
     done
+    shopt -u globstar
 }
 
 runBuild() {
     cd build
     npx vite --port 9999 --open
     cd ..
+}
+
+function _array_contains() { # pseudo-private
+    local -n ARRAY="${1}"
+    local STR="${2}"
+    for item in ${ARRAY[*]} ; do
+        if [[ "${item}" == "${STR}" ]] ; then
+            echo 1
+            return
+        fi
+    done
+    echo 0
 }
 
 function _replace_in_file() { # pseudo-private
@@ -122,6 +146,7 @@ function _init_commands() { # pseudo-private
         fi
     done
     (( MAX_OPTION = I - 1 ))
+    shopt -u globstar
 }
 
 function _quit() { # pseudo-private
