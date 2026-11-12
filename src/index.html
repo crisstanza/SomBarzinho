@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Stanza Fest - 14/11/2026, 12hs - O menor festival de m&uacute;sica do interior do estado!</title>
+    <title>Stanza Fest - 14/11/2026, 12h - O menor festival de m&uacute;sica do interior do estado!</title>
     <meta charset="UTF-8" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png?ts=${TS}" />
     <link rel="icon" type="image/x-icon" href="favicon.ico?ts=${TS}" />
@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body bg="0" class="bg-0">
-    <h1><a href=".">SomBarzinho</a></h1>
+    <h1 id="topo"><a href=".">SomBarzinho</a></h1>
     <hr />
     <section id="event">
       <h2>Stanza Fest - O menor festival de m&uacute;sica do interior do estado!</h2>
@@ -19,27 +19,33 @@
       Quem? <b>Dualuna</b> e <b>SomBarzinho</b>.<br />
       Quando? <b>14-Novembro-2026, 12:00</b><br />
       <br />
-      <a href="regulamento-e-regras-de-convivencia.html">Regulamento e Regras de Conviv&ecirc;ncia</a> | <a href="playlist.html">Playlist</a> | <a href="eventos/" class="lowlight">Edi&ccedil;&otilde;es Anteriores</a>
+      <a href="regulamento-e-regras-de-convivencia.html" class="lowlight">Regulamento e Regras de Conviv&ecirc;ncia</a> | <a href="playlist.html" class="lowlight">Playlist</a> | <a href="eventos/" class="lowlight">Edi&ccedil;&otilde;es Anteriores</a>
     </section>
     <hr />
     <h2 id="musicas">M&uacute;sicas<span id="total"></span>:</h2>
     <hr />
     <section class="search search-input">
       <input type="text" id="searchTerm" />
+      <script>
+        document.getElementById("searchTerm").focus();
+      </script>
       <input type="button" id="clearSearch" value="X" />
     </section>
-    <section class="search" id="search">Pesquisar em: <a href="#artista" class="current">artista</a> | <a class="current" href="#nome">m&uacute;sica</a> | <a href="#letra">letra</a></section>
+    <section class="search" id="search">
+      Pesquisar em:<br class="only-small-screen" />
+      <a href="#artista" class="current">artista</a> | <a class="current" href="#nome">m&uacute;sica</a> | <a href="#letra">letra</a>
+    </section>
     <section id="sort">Ordenar por: <a href="#artista" class="current">artista</a> | <a href="#nome">m&uacute;sica</a></section>
     <hr />
     <ol id="index">
       <li class="loading"><i>carregando...</i></li>
     </ol>
-    <hr />
     <br />
     <div id="songs"></div>
+    <a href="#topo">(topo)</a>
     <footer>
       <a title="source code on GitHub" target="_blank" href="https://github.com/crisstanza/sombarzinho/">
-        <img src="img/github.png" width="48" height="48" class="github-icon" />
+        <img src="img/github.png" width="40" height="40" class="github-icon" />
       </a>
     </footer>
   </body>

@@ -37,39 +37,6 @@ export type Song = {
   drawingPathsBackup: unknown | null;
 };
 
-export type SetDetails = {
-  Id: number;
-  name: string;
-  date: string;
-  ModifiedDateTime: string;
-  Deleted: number;
-  SyncId: string;
-};
-
-export type SetContent = {
-  Id: number;
-  Order: number;
-  Capo: number;
-  SetId: number;
-  SongId: number;
-  keyOfset: number;
-  ModifiedDateTime: string;
-  Deleted: number;
-  SyncId: string;
-  NotesText: string | null;
-  SectionOrder: string;
-  ItemType: number;
-  Content: string;
-  drawingPathsBackup: unknown | null;
-};
-
-export type SongSet = {
-  details: SetDetails;
-  contents: SetContent[];
-};
-
 export type SongsCollection = {
   songs: Song[];
-  sets: SongSet[];
-  folders: unknown[];
 };

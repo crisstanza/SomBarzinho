@@ -1,11 +1,11 @@
-import { RandomUtils } from "./classes/RandomUtils.mjs";
+import { BackgroundRandomizer } from "./classes/BackgroundRandomizer.mjs";
 import { Utils } from "./classes/Utils.mjs";
-import { SEARCH_IN, SORT_BY } from "./enums/enums.mjs";
-import { songsCollection } from "./songs/songsCollection.mjs";
+import { HTML, SEARCH_IN, SORT_BY } from "./enums/enums.mjs";
+import { collection } from "./songs/song-collection.mjs";
 import { Song } from "./types/types.mjs";
 
 const utils = new Utils();
-const randomUtils = new RandomUtils();
+const backgroundRandomizer = new BackgroundRandomizer();
 
 const searchTerm = document.getElementById("searchTerm") as HTMLInputElement;
 const clearSearch = document.getElementById("clearSearch") as HTMLButtonElement;
@@ -23,10 +23,10 @@ function setListenners() {
   const sortByClick = (event: Event) => {
     const current = sort.querySelector("a.current");
     if (current) {
-      current.classList.remove("current");
+      current.classList.remove(HTML.CLASS_NAMES.CURRENT);
     }
     const target = event.target as HTMLElement;
-    target.classList.add("current");
+    target.classList.add(HTML.CLASS_NAMES.CURRENT);
     showSongs();
   };
   const sortLinks = sort.querySelectorAll("a");
@@ -43,12 +43,12 @@ function setListenners() {
     const searchInClick = (event: Event) => {
       const currents = search.querySelectorAll("a.current");
       const target = event.target as HTMLElement;
-      if (target.classList.contains("current")) {
+      if (target.classList.contains(HTML.CLASS_NAMES.CURRENT)) {
         if (currents.length > 1) {
-          target.classList.remove("current");
+          target.classList.remove(HTML.CLASS_NAMES.CURRENT);
         }
       } else {
-        target.classList.add("current");
+        target.classList.add(HTML.CLASS_NAMES.CURRENT);
       }
       showSongs();
     };
@@ -93,26 +93,26 @@ function sortSongs(songsToSort: Song[]) {
 function showSongs() {
   const term = searchTerm?.value.trim().toLowerCase() ?? "";
   const searchFields = search ? Array.from(search.querySelectorAll("a.current")).map((link) => (link as HTMLAnchorElement).hash) : [];
-  const filteredSongs = songsCollection.songs.filter((song) => {
+  const filteredSongs = collection.songs.filter((song) => {
     if (!term) {
       return true;
     }
     return (searchFields.includes(SEARCH_IN.NAME) && song.name.toLowerCase().includes(term)) || (searchFields.includes(SEARCH_IN.ARTIST) && song.author.toLowerCase().includes(term)) || (searchFields.includes(SEARCH_IN.LYRICS) && song.content.toLowerCase().includes(term));
   });
-  if (filteredSongs.length == songsCollection.songs.length) {
+  if (filteredSongs.length == collection.songs.length) {
     total.innerHTML = ` (${filteredSongs.length})`;
   } else {
-    total.innerHTML = ` (${filteredSongs.length}/${songsCollection.songs.length})`;
+    total.innerHTML = ` (${filteredSongs.length}/${collection.songs.length})`;
   }
   const sortBy = sortSongs(filteredSongs);
   utils.removeAllChildren(songs);
   utils.removeAllChildren(index);
   filteredSongs.forEach((song) => {
-    const item = document.createElement("li");
-    item.innerHTML = `<a href="#${utils.normalize(song.author, song.name)}">${getDynamicFriendlySongIdentifier(song, sortBy, term, searchFields)}</a>`;
-    index.appendChild(item);
-  });
-  filteredSongs.forEach((song) => {
+    index.classList.remove(HTML.CLASS_NAMES.NO_RESULTS);
+    const itemLi = document.createElement("li");
+    itemLi.innerHTML = `<a href="#${utils.normalize(song.author, song.name)}">${getDynamicFriendlySongIdentifier(song, sortBy, term, searchFields)}</a>`;
+    index.appendChild(itemLi);
+
     const title = document.createElement("h3");
     title.id = utils.normalize(song.author, song.name);
     title.innerHTML = `${getFriendlySongIdentifier(song, term, searchFields)} <a href="#musicas">(topo)</a>`;
@@ -120,28 +120,19 @@ function showSongs() {
     const content = document.createElement("span");
     content.innerHTML = getSongContent(song, term, searchFields);
 
-    const item = document.createElement("pre");
-    item.appendChild(title);
-    item.appendChild(content);
+    const itemPre = document.createElement("pre");
+    itemPre.appendChild(title);
+    itemPre.appendChild(content);
 
-    songs.appendChild(item);
+    songs.appendChild(itemPre);
     songs.appendChild(document.createElement("hr"));
     songs.appendChild(document.createElement("br"));
   });
-  randomBackground();
-}
-
-function randomBackground() {
-  const min = 0;
-  const max = 3;
-  const body = document.body;
-  const bgIndex = Number(body.getAttribute("bg"));
-  const currentClass = `bg-${bgIndex}`;
-  let newBgIndex = randomUtils.randBetween(min, max);
-  while (newBgIndex == bgIndex) {
-    newBgIndex = randomUtils.randBetween(min, max);
+  if (filteredSongs.length == 0) {
+    const itemLi = document.createElement("li");
+    itemLi.innerText = `Nenhum resultado encontrado.`;
+    index.appendChild(itemLi);
+    index.classList.add(HTML.CLASS_NAMES.NO_RESULTS);
   }
-  body.classList.add(`bg-${newBgIndex}`);
-  body.setAttribute("bg", newBgIndex.toString());
-  body.classList.remove(currentClass);
+  backgroundRandomizer.apply();
 }

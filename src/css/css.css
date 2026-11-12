@@ -234,9 +234,13 @@ section.search,
 		}
 
 		&.loading {
-			list-style: none;
+			list-style: circle;
 		}
 	}
+}
+
+ol.no-results {
+	list-style: circle;
 }
 
 #songs {
@@ -289,12 +293,6 @@ pre {
 	}
 }
 
-ol {
-	&>li.loading {
-		list-style-type: none;
-	}
-}
-
 img {
 	&.center {
 		display: block;
@@ -308,9 +306,13 @@ img {
 	}
 }
 
+br.only-small-screen {
+	display: none;
+}
+
 @media (max-width: 600px) {
 	body {
-		width: min(100% - 1.25rem, 960px);
+		width: min(100%, 960px);
 		padding-top: 1.25rem;
 	}
 
@@ -325,6 +327,10 @@ img {
 	#index {
 		grid-template-columns: 1fr;
 		padding-right: 1rem;
+	}
+
+	br.only-small-screen {
+		display: initial;
 	}
 }
 
