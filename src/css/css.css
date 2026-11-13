@@ -183,7 +183,7 @@ section.search,
 }
 
 #searchTerm {
-	flex: 1 1 20rem;
+	flex: 0 1 30rem;
 	min-width: 0;
 }
 
@@ -314,6 +314,10 @@ br.only-small-screen {
 	body {
 		width: min(100%, 960px);
 		padding-top: 1.25rem;
+	}
+
+	#searchTerm {
+		flex: 1 1 auto;
 	}
 
 	#event {

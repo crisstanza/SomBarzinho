@@ -14,6 +14,11 @@ export const SORT_BY = Object.freeze({
   ARTIST: "#artista",
 });
 
+export const SORT_DIRECTION = Object.freeze({
+  A_Z: "#a-z",
+  Z_A: "#z-a",
+});
+
 export const SEARCH_IN = Object.freeze({
   NAME: "#nome",
   ARTIST: "#artista",

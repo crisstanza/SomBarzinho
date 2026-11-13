@@ -1,6 +1,6 @@
 import { BackgroundRandomizer } from "./classes/BackgroundRandomizer.mjs";
 import { Utils } from "./classes/Utils.mjs";
-import { HTML, SEARCH_IN, SORT_BY } from "./enums/enums.mjs";
+import { HTML, SEARCH_IN, SORT_BY, SORT_DIRECTION } from "./enums/enums.mjs";
 import { collection } from "./songs/song-collection.mjs";
 import { Song } from "./types/types.mjs";
 
@@ -12,6 +12,8 @@ const clearSearch = document.getElementById("clearSearch") as HTMLButtonElement;
 
 const search = document.getElementById("search") as HTMLElement;
 const sort = document.getElementById("sort") as HTMLElement;
+const sortDirection = document.getElementById("sortDirection") as HTMLElement;
+
 const index = document.getElementById("index") as HTMLElement;
 const songs = document.getElementById("songs") as HTMLElement;
 const total = document.getElementById("total") as HTMLElement;
@@ -61,6 +63,20 @@ function setListenners() {
     };
     clearSearch.addEventListener("click", clearSearchClick);
   }
+
+  if (sortDirection) {
+    const sortDirectionClick = (event: Event) => {
+      const current = sortDirection.querySelector("a.current");
+      if (current) {
+        current.classList.remove(HTML.CLASS_NAMES.CURRENT);
+      }
+      const target = event.target as HTMLElement;
+      target.classList.add(HTML.CLASS_NAMES.CURRENT);
+      showSongs();
+    };
+    const sortDirectionLinks = sortDirection.querySelectorAll("a");
+    sortDirectionLinks.forEach((link) => link.addEventListener("click", sortDirectionClick));
+  }
 }
 
 function getDynamicFriendlySongIdentifier(song: Song, sortBy: HTMLAnchorElement, term = "", searchFields: string[] = []) {
@@ -86,7 +102,9 @@ function getSongContent(song: Song, term: string, searchFields: string[]): strin
 
 function sortSongs(songsToSort: Song[]) {
   const sortBy = sort.querySelector("a.current") as HTMLAnchorElement;
-  songsToSort.sort((song1, song2) => getDynamicFriendlySongIdentifier(song1, sortBy).localeCompare(getDynamicFriendlySongIdentifier(song2, sortBy)));
+  const sortDirectionCurrent = sortDirection?.querySelector("a.current") as HTMLAnchorElement | null;
+  const direction = sortDirectionCurrent?.hash === SORT_DIRECTION.Z_A ? -1 : 1;
+  songsToSort.sort((song1, song2) => direction * getDynamicFriendlySongIdentifier(song1, sortBy).localeCompare(getDynamicFriendlySongIdentifier(song2, sortBy)));
   return sortBy;
 }
 
